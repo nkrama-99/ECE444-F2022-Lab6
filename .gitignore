@@ -1,2 +1,3 @@
 __pycache__
 flaskr-tdd/flaskr.db
+flaskr-tdd/test.db
