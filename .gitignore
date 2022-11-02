@@ -1,5 +1,4 @@
 __pycache__
-flaskr.db
 test.db
 env
 *.pyc

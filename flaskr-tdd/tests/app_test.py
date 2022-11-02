@@ -106,8 +106,20 @@ def test_search_message_text(client):
     assert b"<strong>HTML</strong> allowed here" in rv.data
 
 
-def test_delete_message(client):
+def test_delete_message_without_login(client):
     """Ensure the messages are being deleted"""
     rv = client.get('/delete/1')
+    data = json.loads(rv.data)
+    assert data["status"] == 0
+    assert b"Please log in" in rv.data
+
+
+def test_delete_message(client):
+    """Ensure the messages are being deleted"""
+    rv = client.get("/delete/1")
+    data = json.loads(rv.data)
+    assert data["status"] == 0
+    login(client, app.config["USERNAME"], app.config["PASSWORD"])
+    rv = client.get("/delete/1")
     data = json.loads(rv.data)
     assert data["status"] == 1
